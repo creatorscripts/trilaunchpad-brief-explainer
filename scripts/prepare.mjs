@@ -42,5 +42,7 @@ const env = [
   `CALLBACK=${payload.callback || ""}`,
   `FILE=${runKey}.mp4`,
 ].join("\n");
+// Never print the callback address in public logs.
+if (payload.callback) console.log(`::add-mask::${payload.callback}`);
 fs.appendFileSync(process.env.GITHUB_ENV, env + "\n");
-console.log(env);
+console.log(env.split("\n").filter((l) => !l.startsWith("CALLBACK=")).join("\n"));
