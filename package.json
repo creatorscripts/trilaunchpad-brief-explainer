@@ -1,0 +1,19 @@
+{
+  "name": "trilaunchpad-brief-explainer",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Weekly race-brief explainer reels for triathlon.mx (Remotion).",
+  "scripts": {
+    "render": "remotion render src/index.ts BriefExplainer out/raw.mp4 --props=props.json --codec=h264 --crf=23"
+  },
+  "dependencies": {
+    "@fontsource/fraunces": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
+    "@remotion/bundler": "4.0.541",
+    "@remotion/cli": "4.0.541",
+    "@remotion/renderer": "4.0.541",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "4.0.541"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "slug": "triatlon-bonifacio-garcia",
+  "name": "Tri Estacas",
+  "dateLine": "Sat 23 Jan 2027 · 7:00 AM",
+  "place": "Las Estacas · Morelos, Mexico",
+  "type": "Sprint",
+  "legs": [
+    {
+      "disc": "SWIM",
+      "dist": 750,
+      "unit": "m",
+      "note": "river, downstream"
+    },
+    {
+      "disc": "BIKE",
+      "dist": 20,
+      "unit": "km",
+      "note": "steady effort"
+    },
+    {
+      "disc": "RUN",
+      "dist": 5,
+      "unit": "km",
+      "note": "the home stretch"
+    }
+  ],
+  "beginnerFit": 5,
+  "hook": [
+    "Your first triathlon",
+    "could swim",
+    "downstream."
+  ],
+  "spotlightTitle": [
+    "The river",
+    "gives you a push."
+  ],
+  "spotlightTrap": "But a current can carry you off line. Lift your eyes every few strokes.",
+  "costLow": 1700,
+  "costHigh": 6500,
+  "costNote": "travel · stay · food, plus entry",
+  "unverified": [
+    "Water temperature",
+    "Wetsuit rules",
+    "Bike hills"
+  ],
+  "url": "triathlon.mx",
+  "card": "card.png",
+  "vo": "vo.mp3",
+  "cuts": [
+    4.96,
+    7.99,
+    13.33,
+    19.95,
+    22.41,
+    27.81,
+    33.49
+  ],
+  "totalSec": 37.6,
+  "legCues": [
+    1.0,
+    3.4,
+    4.6
+  ],
+  "scenes": [
+    "card",
+    "hook",
+    "legs",
+    "spotlight",
+    "fit",
+    "cost",
+    "check",
+    "cta"
+  ],
+  "spotlightDisc": "SWIM",
+  "currency": "MXN",
+  "kicker": "Race brief · 11 weeks out",
+  "legsTitle": "Three short legs"
+}

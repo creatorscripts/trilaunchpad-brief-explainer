@@ -1,0 +1,7 @@
+node_modules
+out
+public/card.png
+public/vo.mp3
+public/bed.wav
+payload.json
+props.json

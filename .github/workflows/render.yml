@@ -1,0 +1,84 @@
+name: Render brief explainer
+
+on:
+  repository_dispatch:
+    types: [render-brief]
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: "JSON payload (same shape as client_payload)"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-brief
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PAGES_BASE: https://creatorscripts.github.io/trilaunchpad-brief-explainer
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: |
+          npm ci
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -q numpy
+
+      - name: Prepare payload and assets
+        env:
+          CP: ${{ toJSON(github.event.client_payload) }}
+          WD: ${{ github.event.inputs.payload }}
+        run: node scripts/prepare.mjs
+
+      - name: Music bed
+        run: python3 scripts/make_bed.py public/bed.wav "$FRAMES" "$CUTS"
+
+      - name: Render
+        run: npx remotion render src/index.ts BriefExplainer out/raw.mp4 --props=props.json --codec=h264 --crf=23
+
+      - name: Loudness and publish file
+        run: |
+          mkdir -p docs/renders
+          ffmpeg -loglevel error -y -i out/raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -movflags +faststart "docs/renders/$FILE"
+          echo "BYTES=$(stat -c%s docs/renders/$FILE)" >> "$GITHUB_ENV"
+          echo "DURATION=$(ffprobe -v error -show_entries format=duration -of csv=p=0 docs/renders/$FILE)" >> "$GITHUB_ENV"
+          git config user.name "brief-explainer-bot"
+          git config user.email "brief-explainer-bot@users.noreply.github.com"
+          git add "docs/renders/$FILE"
+          git commit -m "render: $RUN_KEY"
+          git pull --rebase -q && git push -q
+
+      - name: Wait for GitHub Pages
+        run: |
+          URL="$PAGES_BASE/renders/$FILE"
+          for i in $(seq 1 60); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$URL")
+            [ "$code" = "200" ] && echo "live: $URL" && break
+            sleep 10
+          done
+          echo "VIDEO_URL=$URL" >> "$GITHUB_ENV"
+          [ "$code" = "200" ]
+
+      - name: Callback (success)
+        if: success() && env.CALLBACK != ''
+        run: |
+          curl -sS -X POST "$CALLBACK" -H 'Content-Type: application/json' \
+            -d "{\"action\":\"rendered\",\"run_key\":\"$RUN_KEY\",\"status\":\"rendered\",\"video_url\":\"$VIDEO_URL\",\"bytes\":$BYTES,\"duration\":$DURATION,\"run_url\":\"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\"}"
+
+      - name: Callback (failure)
+        if: failure() && env.CALLBACK != ''
+        run: |
+          curl -sS -X POST "$CALLBACK" -H 'Content-Type: application/json' \
+            -d "{\"action\":\"rendered\",\"run_key\":\"$RUN_KEY\",\"status\":\"failed\",\"run_url\":\"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\"}"
