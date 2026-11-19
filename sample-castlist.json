@@ -1,0 +1,17 @@
+{
+  "lang": "en",
+  "title": "8 Triathletes in Every Transition Area",
+  "subline": "You're at least one of them.",
+  "scenes": [
+    {"clip": "clip-0.mp4", "label": "", "sub": ""},
+    {"clip": "clip-1.mp4", "label": "", "sub": "Every race morning. Same rack. Same eight people."},
+    {"clip": "clip-2.mp4", "label": "1. THE TOWEL TERRITORY CLAIMER", "sub": "Rack space is one bike wide. Her towel covers three. She calls it a system."},
+    {"clip": "clip-3.mp4", "label": "WHICH ONE ARE YOU?", "sub": "Which one are you? Tag the one who takes three spots."}
+  ],
+  "vo": "vo.mp3",
+  "coverSec": 1.6,
+  "cuts": [3.2, 9.4],
+  "voSec": 14,
+  "clipSec": 5,
+  "bed": "bed.wav"
+}
