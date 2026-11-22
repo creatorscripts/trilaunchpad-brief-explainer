@@ -47,6 +47,7 @@ if (Array.isArray(p.scenes)) {
     return {
       bg: clip || url(parts[1]),
       bgVideo: !!clip,
+      still: url(parts[1]),
       audio: url(parts[parts.length - 3]),
       line: (parts[parts.length - 2] || "").trim(),
       state: talk ? "full" : ROTATE[r++ % ROTATE.length],
@@ -91,8 +92,11 @@ for (let i = 0; i < plan.length; i++) {
   const bgFile = `bg-${i}.${s.bgVideo ? "mp4" : "img"}`;
   let bg = bgFile, bgVideo = s.bgVideo;
   if (!(await download(s.bg, `public/${bgFile}`, 5000))) {
-    if (!lastBg) throw new Error(`shot ${i + 1}: background download failed`);
-    ({ bg, bgVideo } = lastBg); // reuse the previous shot's background
+    if (s.bgVideo && s.still && (await download(s.still, `public/bg-${i}.img`, 5000))) {
+      bg = `bg-${i}.img`; bgVideo = false; // clip failed: use the shot's still image
+    } else if (lastBg) {
+      ({ bg, bgVideo } = lastBg); // reuse the previous shot's background
+    } else throw new Error(`shot ${i + 1}: background download failed`);
   }
   lastBg = { bg, bgVideo };
   const sc = { bg, bgVideo, audio: `vo-${i}.mp3`, speechSec: speechSec(`public/vo-${i}.mp3`), line: s.line, state: s.state };
