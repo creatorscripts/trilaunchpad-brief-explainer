@@ -4,6 +4,8 @@ import { BriefExplainer, timeline } from "./BriefExplainer";
 import { CastList, castTimeline } from "./CastList";
 import props from "../sample-props.json";
 import castProps from "../sample-castlist.json";
+import { StoryReel, storyTimeline } from "./StoryReel";
+import storyProps from "../sample-story.json";
 
 export const Root: React.FC = () => (
   <>
@@ -26,6 +28,16 @@ export const Root: React.FC = () => (
       width={1080}
       height={1920}
       defaultProps={castProps as any}
+    />
+    <Composition
+      id="StoryReel"
+      component={StoryReel as any}
+      durationInFrames={storyTimeline(storyProps as any).total}
+      calculateMetadata={({ props: p }) => ({ durationInFrames: storyTimeline(p as any).total })}
+      fps={30}
+      width={1080}
+      height={1920}
+      defaultProps={storyProps as any}
     />
   </>
 );

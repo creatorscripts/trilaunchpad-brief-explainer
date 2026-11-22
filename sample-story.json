@@ -1,0 +1,2 @@
+{ "title": "Sample", "titleSec": 2.5, "side": "R", "loop": "loop.mp4", "bed": "bed.wav",
+  "scenes": [ { "bg": "bg-0.img", "audio": "vo-0.mp3", "speechSec": 3, "line": "Sample line", "state": "full" } ] }
