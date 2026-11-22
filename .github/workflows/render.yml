@@ -35,6 +35,7 @@ jobs:
           npm ci
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
           pip install -q numpy
+          pip install -q "earshot @ git+https://github.com/Leonxlnx/earshot@7a7f7c5c70d4a763a1eca4b3666af7c77e313f97" || echo "earshot install failed; renders without sound effects"
 
       - name: Prepare payload and assets
         env:
@@ -48,10 +49,15 @@ jobs:
       - name: Render
         run: npx remotion render src/index.ts BriefExplainer out/raw.mp4 --props=props.json --codec=h264 --crf=23
 
+      - name: Sound effects (earshot; optional)
+        continue-on-error: true
+        run: python3 scripts/add_sfx.py out/raw.mp4 out/sfx.mov "$CUTS" brief
+
       - name: Loudness and publish file
         run: |
           mkdir -p docs/renders
-          ffmpeg -loglevel error -y -i out/raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -movflags +faststart "docs/renders/$FILE"
+          SRC=out/raw.mp4; [ -s out/sfx.mov ] && SRC=out/sfx.mov
+          ffmpeg -loglevel error -y -i "$SRC" -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -movflags +faststart "docs/renders/$FILE"
           echo "BYTES=$(stat -c%s docs/renders/$FILE)" >> "$GITHUB_ENV"
           echo "DURATION=$(ffprobe -v error -show_entries format=duration -of csv=p=0 docs/renders/$FILE)" >> "$GITHUB_ENV"
           git config user.name "brief-explainer-bot"
