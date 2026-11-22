@@ -4,7 +4,7 @@
 //
 // Live payload (Make poller 4982957, repository_dispatch "render-story"):
 //   { run_key, title, shots, clips, talks, keys, loop_url, side, callback, passthrough }
-//   shots  = raw shot table, one line per shot: lumaId|image|audio|line|ok  (audio = 2nd-last, line = last)
+//   shots  = raw shot table, one line per shot: lumaId|image|audio|line|ok  (audio = 3rd-last, line = 2nd-last)
 //   clips  = "|"-joined B-roll clip URL per shot (1..15, empty allowed)
 //   talks  = "|"-joined talking-clip URLs for the 5 key shots (empty if that clip failed)
 //   keys   = ","-joined shot numbers (1-based) the 5 talking clips belong to
@@ -47,8 +47,8 @@ if (Array.isArray(p.scenes)) {
     return {
       bg: clip || url(parts[1]),
       bgVideo: !!clip,
-      audio: url(parts[parts.length - 2]),
-      line: (parts[parts.length - 1] || "").trim(),
+      audio: url(parts[parts.length - 3]),
+      line: (parts[parts.length - 2] || "").trim(),
       state: talk ? "full" : ROTATE[r++ % ROTATE.length],
       talk,
     };
