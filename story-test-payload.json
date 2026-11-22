@@ -1,0 +1,47 @@
+{
+ "run_key": "story-test-ncaa-2026-11-22",
+ "title": "NCAA Triathlon Key Facts",
+ "titleSec": 2.5,
+ "side": "R",
+ "loop_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DlwSy3fc8HPNZQkMqXuB92NJR8/hf_20261107_024836_fbdd5d97-95f8-4c62-91b3-ae860ee7b929.mp4",
+ "scenes": [
+  {
+   "image_url": "https://drive.google.com/uc?id=1bOzS7_vZBvKmrcETGKGT8koFpYc-qsFE&export=download",
+   "audio_url": "https://drive.google.com/uc?id=1OjrTpeWfJLjgMmBImFagaI8X2SaZXcK2&export=download",
+   "line": "Navy Sends Nine to NCAA Triathlon",
+   "state": "full",
+   "talk_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DlwSy3fc8HPNZQkMqXuB92NJR8/hf_20261122_171835_dc512e1d-f209-4de7-8a14-4187b49303a0.mp4"
+  },
+  {
+   "image_url": "https://drive.google.com/uc?id=1xdWq2Qb6z3Btl1YUPG4pIG1mWiXnlHYR&export=download",
+   "audio_url": "https://drive.google.com/uc?id=1Sjmt1fgNBRRJGm8dgSlo8X3yvklBPb5u&export=download",
+   "line": "Lake Lanier Georgia",
+   "state": "none"
+  },
+  {
+   "image_url": "https://drive.google.com/uc?id=1ry-_Bm3kE3znXfkovT34cNIOs3Bz7S-c&export=download",
+   "audio_url": "https://drive.google.com/uc?id=13zCKyX0zgmItbLHHeyxkfFQk-kXg-ltN&export=download",
+   "line": "All Navy in Heat A",
+   "state": "circle"
+  },
+  {
+   "image_url": "https://drive.google.com/uc?id=16nqrYBt7YUB9p5EcQTFSUk4NgCnGeWVo&export=download",
+   "audio_url": "https://drive.google.com/uc?id=1gpNYstjcV5it5zGiIuFx4rOWq1JjaNuY&export=download",
+   "line": "Top Twenty Advance",
+   "state": "split"
+  },
+  {
+   "image_url": "https://drive.google.com/uc?id=1DTAKHfD9fWsFq4OU0Yq5sFdDjDRESHe4&export=download",
+   "audio_url": "https://drive.google.com/uc?id=1HRCl_DK2kaoA7nmaIWqr9kUjI5sI0Vmc&export=download",
+   "line": "Navy Only Three Years",
+   "state": "none"
+  },
+  {
+   "image_url": "https://drive.google.com/uc?id=1Ht8ZVd_bMS9pubIGFrTrlb0v40uAfm8x&export=download",
+   "audio_url": "https://drive.google.com/uc?id=1ASH1r9727NlllN16iSHpM_Tv1wTCLsZ1&export=download",
+   "line": "Your Triathlon Starts Here",
+   "state": "full",
+   "talk_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DlwSy3fc8HPNZQkMqXuB92NJR8/hf_20261122_171837_02a21ad6-914e-4ed7-b947-43ca322660fd.mp4"
+  }
+ ]
+}
